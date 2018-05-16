@@ -9,10 +9,20 @@ task_list = task.get_all()
 window = Tk()
 window.title("ToDo list app")
 
-t = SimpleTable(window, len(task_list), 8)
-t.pack(side='top', fill='x')
+# Define number of columns
+column_count =
+# Define number of rows
+row_count =
+# Empty table object with size row_count x column_count
+table = SimpleTable(window, row_count, column_count)
+table.pack(side='top', fill='x')
 
-t.set(0, 0, task_list[0]['title'])
+# Fill table with values
+table.set(0, 0, task_list[0]['title'])
+
+
+
+
 
 
 # Run app
