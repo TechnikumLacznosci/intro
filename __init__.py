@@ -1,9 +1,9 @@
 from Tkinter import *
 from SimpleTable import *
 from TaskDownloader import Task
-import json
+from json import loads
 import tkFileDialog
-import urllib2
+from urllib2 import URLError
 
 window = Tk()
 window.title("ToDo list app")
@@ -28,13 +28,13 @@ def instantiate_table(data_list):
             table.set(i, j, get_from_table(i, j, table))
 
 # Add file dialog button
-def data_call_file_dialog():
+def call_file_dialog():
     window.filename = tkFileDialog.askopenfilename(initialdir = 'C:\\',title="Select file: ", filetypes= (("JSON File",'*.json'), ("All files", '*')))
     with open(window.filename, 'r') as json_file:
         Data_list = json.load(json_file)
         instantiate_table(Data_list)
 
-def data_get_from_internet():
+def get_data_from_internet():
     try:
         task = Task(json_file_uri)
         task_list = task.get_all()
@@ -44,10 +44,10 @@ def data_get_from_internet():
         
 
 # Add 'Load tasks' button
-button_call_table = Button(window, text="Load tasks", command=data_get_from_internet)
+button_call_table = Button(window, text="Load tasks", command=get_data_from_internet)
 button_call_table.grid(column='0',row='0')
 
-button_call_file_dialog = Button(window, text="Choose file", command=data_call_file_dialog)
+button_call_file_dialog = Button(window, text="Choose file", command=call_file_dialog)
 button_call_file_dialog.grid(column='1',row='0')
 
 # Run app
