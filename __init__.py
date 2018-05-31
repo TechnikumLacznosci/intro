@@ -1,7 +1,7 @@
 from Tkinter import *
 from SimpleTable import *
 from TaskDownloader import Task
-from json import loads
+import json
 import tkFileDialog
 from urllib2 import URLError
 
