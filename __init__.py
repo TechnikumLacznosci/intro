@@ -3,7 +3,7 @@ from SimpleTable import *
 from TaskDownloader import Task
 import json
 import tkFileDialog
-from urllib2 import URLError
+import urllib2
 
 window = Tk()
 window.title("ToDo list app")
