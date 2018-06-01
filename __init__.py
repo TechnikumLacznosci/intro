@@ -26,7 +26,7 @@ def instantiate_table(data_list):
     for i in range(0, row_count):
         for j in range(0, column_count):
             table.set(i, j, get_from_table(i, j, table))
-
+            
 # Add file dialog button
 def call_file_dialog():
     file_extensions = [("JSON File", '*.json'), ("All files", '*')]
