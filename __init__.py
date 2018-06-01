@@ -29,10 +29,12 @@ def instantiate_table(data_list):
 
 # Add file dialog button
 def call_file_dialog():
-    window.filename = tkFileDialog.askopenfilename(initialdir = 'C:\\',title="Select file: ", filetypes= (("JSON File",'*.json'), ("All files", '*')))
+    file_extensions = [("JSON File", '*.json'), ("All files", '*')]
+    window.filename = tkFileDialog.askopenfilename(initialdir = 'C:\\', 
+        title="Select file: ", filetypes = file_extensions)
     with open(window.filename, 'r') as json_file:
-        Data_list = json.load(json_file)
-        instantiate_table(Data_list)
+        data_list = json.load(json_file)
+        instantiate_table(data_list)
 
 def get_data_from_internet():
     try:
@@ -45,10 +47,10 @@ def get_data_from_internet():
 
 # Add 'Load tasks' button
 button_call_table = Button(window, text="Load tasks", command=get_data_from_internet)
-button_call_table.grid(column='0',row='0')
+button_call_table.grid(column='0', row='0')
 
 button_call_file_dialog = Button(window, text="Choose file", command=call_file_dialog)
-button_call_file_dialog.grid(column='1',row='0')
+button_call_file_dialog.grid(column='1', row='0')
 
 # Run app
 window.mainloop()
