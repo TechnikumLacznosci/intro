@@ -34,6 +34,8 @@ def call_file_dialog():
         title="Select file: ", filetypes = file_extensions)
     with open(window.filename, 'r') as json_file:
         data_list = json.load(json_file)
+        # remove previous table
+        window.nametowidget('tableWithTasks').grid_forget()
         instantiate_table(data_list)
 
 def get_data_from_internet():
@@ -44,18 +46,18 @@ def get_data_from_internet():
     except urllib2.URLError:
         print("Failed to load the given URL")
 
+def frame_with_buttons():
+    button_frame = Frame(window)
+    button_frame.grid(row='1', column='0')
+
+    button_call_file_dialog = Button(button_frame, text="Choose file", command=call_file_dialog)
+    button_call_file_dialog.grid(row='0', column='0')
 
 
+# Fill table with the data from the internet
+get_data_from_internet()
+# Add buttons below the table
+frame_with_buttons()
 
-
-# Add 'Load tasks' button
-button_call_table = Button(window, text="Load tasks", command=get_data_from_internet)
-button_call_table.grid(column='0', row='0')
-
-button_call_file_dialog = Button(window, text="Choose file", command=call_file_dialog)
-button_call_file_dialog.grid(column='1', row='0')
-
-button3 = Button(window, text='asd')
-button3.grid(column='1', row='1')
 # Run app
 window.mainloop()
