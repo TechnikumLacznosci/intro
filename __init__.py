@@ -17,23 +17,25 @@ def instantiate_table(data_list):
     row_count = len(data_list)
     # Empty table object with size row_count x column_count
     table = SimpleTable(window, row_count, column_count)
-    table.pack(side='top', fill='x')
-    
+    table.grid(row='0', column='0')
+
     def get_from_table(i, j, tab):
         return data_list[i][data_list[i].keys()[j]]
-    
+
     # Fill table with values
     for i in range(0, row_count):
         for j in range(0, column_count):
             table.set(i, j, get_from_table(i, j, table))
-            
+
 # Add file dialog button
 def call_file_dialog():
     file_extensions = [("JSON File", '*.json'), ("All files", '*')]
-    window.filename = tkFileDialog.askopenfilename(initialdir = 'C:\\', 
+    window.filename = tkFileDialog.askopenfilename(initialdir = 'C:\\',
         title="Select file: ", filetypes = file_extensions)
     with open(window.filename, 'r') as json_file:
         data_list = json.load(json_file)
+        # remove previous table
+        window.nametowidget('tableWithTasks').grid_forget()
         instantiate_table(data_list)
 
 def get_data_from_internet():
@@ -43,14 +45,19 @@ def get_data_from_internet():
         instantiate_table(task_list)
     except urllib2.URLError:
         print("Failed to load the given URL")
-        
 
-# Add 'Load tasks' button
-button_call_table = Button(window, text="Load tasks", command=get_data_from_internet)
-button_call_table.grid(column='0', row='0')
+def frame_with_buttons():
+    button_frame = Frame(window)
+    button_frame.grid(row='1', column='0')
 
-button_call_file_dialog = Button(window, text="Choose file", command=call_file_dialog)
-button_call_file_dialog.grid(column='1', row='0')
+    button_call_file_dialog = Button(button_frame, text="Choose file", command=call_file_dialog)
+    button_call_file_dialog.grid(row='0', column='0')
+
+
+# Fill table with the data from the internet
+get_data_from_internet()
+# Add buttons below the table
+frame_with_buttons()
 
 # Run app
 window.mainloop()
