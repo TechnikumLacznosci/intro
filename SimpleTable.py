@@ -6,7 +6,7 @@ class SimpleTable(tk.Frame):
     def __init__(self, parent, rows=10, columns=2):
         # use black background so it "peeks through" to
         # form grid lines
-        tk.Frame.__init__(self, parent, background="black")
+        tk.Frame.__init__(self, parent, background="black", name="tableWithTasks")
         self._widgets = []
         for row in range(rows):
             current_row = []
