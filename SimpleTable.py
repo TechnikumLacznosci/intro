@@ -1,5 +1,4 @@
 # https://stackoverflow.com/a/11049650/2933843
-
 import Tkinter as tk
 
 class SimpleTable(tk.Frame):
